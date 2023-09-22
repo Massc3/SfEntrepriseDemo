@@ -1,0 +1,15 @@
+{% block title %}Detail d'un employé{% endblock %}
+
+{% block body %}
+<h1>Detail d'un employé</h1>
+
+<h2>{{ employe }}</h2>
+<p>
+  {{employe.getNameComplete}} <br>
+  Ville : {% if employe.ville %}{{ employe.ville }} {% else %}Ville non renseignée{% endif %} <br>
+  Entreprise : <a href=" {{path('afficherDetail_entreprise', {'id' : employe.entreprise.id })}}">{{employe.entreprise}} </a><br>
+   Date de naissance : {{employe.dateNaissance|date("m/d/Y")}} <br>
+   Date d'embauche : {{employe.dateEmbauche|date("m/d/Y")}}
+</p>
+   
+{% endblock %}

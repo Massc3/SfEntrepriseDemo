@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail d'une entreprise{% endblock %}
+
+{% block body %}
+<h1>Detail d'une entreprise</h1>
+{# on veut afficher les details de l'entreprise avec son adresse pour laquelle nous avons creer une fonction qui reunis une chaine de caracteres, et la date de creation #}
+<h2>{{ entreprise }}</h2>
+<p>
+   Adresse :  {{entreprise.adresseComplete}} <br>
+   Date de création : {{entreprise.dateCreation|date("m/d/Y")}}
+</p>
+
+<h3>liste des salariés</h3>
+
+{% if entreprise.employes | length > 0 %}
+    
+        {# on va recuperer la collection que l'on veut dans l'entité de l'entreprise (Entreprise.php) du coup nous faison entreprise.(nomm de la collection) #}
+        {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
+        {% for employe in entreprise.employes %}
+            <a href=" {{ path('afficherDetail_employe', {'id' :employe.id}) }}">{{ employe }} </a><br>
+        {% endfor %}
+    {% else %}
+        <p>Aucun salarié dans l'entreprise </p>
+    {% endif %}
+
+{% endblock %}
