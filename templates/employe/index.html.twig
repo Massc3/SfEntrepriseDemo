@@ -4,10 +4,14 @@
 
 {% block body %}
     <h1>Liste des emloyés</h1>
+
+    <a href="{{ path('new_employe')}}">Ajouter un employe</a>
     {% for employe in employes %}
         {# {{...}} correspond a l'echo en symfony #}
         {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans Employe.php #}
-        <a href="{{ path('afficherDetail_employe', {'id': employe.id}) }}">{{ employe }}</a>     ({{ employe.entreprise.raisonSociale}})<br>
+        <a href="{{ path('afficherDetail_employe', {'id': employe.id}) }}">{{ employe }}</a>     ({{ employe.entreprise.raisonSociale}})
+        <a class="bbtn btn-warning" href=" {{ path('edit_employe', {'id' : employe.id}) }}">Edit</a><br>
+        <a href=" {{ path('delete_employe', {'id' :employe.id}) }}">Supp</a><br>
     {% endfor %}
 
 {% endblock %}

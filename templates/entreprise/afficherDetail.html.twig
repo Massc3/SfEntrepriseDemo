@@ -14,12 +14,21 @@
 <h3>liste des salariés</h3>
 
 {% if entreprise.employes | length > 0 %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Employe</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# on va recuperer la collection que l'on veut dans l'entité de l'entreprise (Entreprise.php) du coup nous faison entreprise.(nomm de la collection) #}
+            {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
+            {% for employe in entreprise.employes %}
+            <tr><td><a href=" {{ path('afficherDetail_employe', {'id' :employe.id}) }}">{{ employe }} </a></td></tr><br>
+            {% endfor %}
+        </tbody>
+    </table>
     
-        {# on va recuperer la collection que l'on veut dans l'entité de l'entreprise (Entreprise.php) du coup nous faison entreprise.(nomm de la collection) #}
-        {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
-        {% for employe in entreprise.employes %}
-            <a href=" {{ path('afficherDetail_employe', {'id' :employe.id}) }}">{{ employe }} </a><br>
-        {% endfor %}
     {% else %}
         <p>Aucun salarié dans l'entreprise </p>
     {% endif %}

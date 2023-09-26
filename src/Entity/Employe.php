@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\EmployeRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EmployeRepository;
 
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
 class Employe
@@ -116,5 +117,13 @@ class Employe
         $this->ville = $ville;
 
         return $this;
+    }
+
+    public function getAge(): ?string
+    {
+        $now = new DateTime();
+        $interval = $this->dateNaissance->diff($now);
+        return $interval->format("
+        %Y");
     }
 }
